@@ -1,24 +1,28 @@
-#ifndef SHAPE_H
-#define SHAPE_H
-
-#include <string>
 #include "Point2D.h"
+#include <cmath>
 
-class Shape {
-    protected:
-        std::string color;
 
-    public:
-        Shape(std::string color = "red") : color(color) {}
-        virtual ~Shape() {}
+	Point2D::Point2D(double x, double y){
+		this-> x = x;
+		this-> y = y;
+	}
 
-        std::string get_color() const { return color; }
-        void set_color(std::string c) { color = c; }
+        double Point2D::distance(const Point2D &p1, const Point2D &p2) {
+            return std::sqrt(std::pow(p1.x - p2.x, 2) + std::pow(p1.y - p2.y, 2));
+        }
 
-        virtual double area() const = 0;
-        virtual double perimeter() const = 0;
-        virtual void translate(double dx, double dy) = 0;
-        virtual void print() const = 0;
-};
+        bool operator==(const Point2D &p1, const Point2D &p2) {
+            return p1.x == p2.x && p1.y == p2.y;
+        }
 
-#endif
+        bool operator!=(const Point2D &p1, const Point2D &p2) {
+            return !(p1 == p2);
+        }
+
+        std::ostream& operator<<(std::ostream &out, const Point2D &p) {
+            out << "(" << p.x << "," << p.y << ")";
+            return out;
+        }
+
+
+
